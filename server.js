@@ -13,7 +13,7 @@ app.use(express.json());
 //MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('Connected to MongoDB Atlas'))
-.catch((error) => console.error('Error connecting to MongoDB', error));
+.catch((error) => console.error('Error connecting to MongoDB..', error));
 
 //Basic Route 
 app.get('/', (req, res) => {
