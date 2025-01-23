@@ -2,6 +2,9 @@
 require ('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+
+
 
 const Student  = require('./models/student')
 
@@ -9,7 +12,12 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 //middleware to parse JSON
-app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow requests from the frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+  }));
+// app.use(express.json());
 
 //MongoDB connection
 mongoose.connect(process.env.MONGO_URI)

@@ -3,22 +3,34 @@
 import React, { useEffect, useState } from 'react'
 
 function Fetch_api() {
-    const [records, setRecords] = useState([])
+    const [students, setStudents] = useState([])
 
     useEffect(()=>{
         fetch('http://localhost:4000/students')
         .then(response => response.json())
-        .then(data => setRecords(data))
+        .then(data => setStudents(data))
         .catch(err => console.log(err))
     }, [])
   return (
     <div>
-        <button>GET STARTED</button>
-        <ul>
-            {/* {records.map((list, index)=> (
-                <li key={index}>{list.id} | {list.name}</li>
-            ))} */}
+        <h1>Student List</h1>
+        
+        {students.length === 0 ? (
+            <p>No student found</p>
+        ) : (
+            <ul>
+            {students.map((student) => (
+                <li key={student.id}>
+                    <strong>Name:</strong>{student.name}<br/>
+                    <strong>Department:</strong>{student.department}<br/>
+                    <strong>Address:</strong>{student.address}<br/>
+                    <strong>Gender:</strong>{student.gender}<br/>
+                    <strong>Age:</strong>{student.age}<br/><br/>
+                </li>
+            ))}
         </ul>
+        )}
+        
     </div>
   )
 }
